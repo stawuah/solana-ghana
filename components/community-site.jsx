@@ -43,7 +43,7 @@ function Header({ page, open, setOpen }) {
 
 function Footer() {
   return <footer className="footer">
-    <div><Eyebrow tone="light">Independent initiative</Eyebrow><h2>Build Ghana’s<br /><em>on-ramp.</em></h2></div>
+    <div><Eyebrow tone="light">Independent initiative</Eyebrow><h2>Build Ghana’s<br /><em>on-ramp.</em></h2><div className="footer-adinkra" aria-label="Adinkra symbols"><AdinkraSymbol kind="gye-nyame" label="Gye Nyame" /><AdinkraSymbol kind="sankofa" label="Akoma Ntoaso" /><AdinkraSymbol kind="nkyinkyim" label="Akofena" /></div></div>
     <div className="footer-links"><div><b>Explore</b><Link href="/learn">Learn</Link><Link href="/build">Build</Link><Link href="/security">Teams</Link></div><div><b>Connect</b><a href="https://t.me/solanaghanacommunity" target="_blank" rel="noreferrer">Telegram</a><a href="https://chat.whatsapp.com/JTaWqtd3YK78ZMHhChc9Z5?mode=gi_t" target="_blank" rel="noreferrer">WhatsApp</a><a href="#join">GitHub</a></div></div>
     <div className="footer-base">© 2026 Solana Ghana Community <span>Not an official Superteam or Solana Foundation chapter.</span></div>
   </footer>
