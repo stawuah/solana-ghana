@@ -72,6 +72,7 @@
 @media (max-width:820px) { .teams-hero,.team-process,.team-apply>.wrap { grid-template-columns:1fr; gap:42px; }.teams-hero { padding-top:145px; min-height:auto; padding-bottom:80px; }.teams-hero h1 { font-size:clamp(64px,17vw,88px); }.stack-visual { transform:none; }.team-grid { grid-template-columns:1fr; padding-bottom:80px; }.teams-benefits { padding:80px 0; }.benefit-strip { grid-template-columns:1fr; }.team-process { padding:80px 0; }.team-apply { padding:80px 0; } }
 @media (max-width:480px) { .team-application { grid-template-columns:1fr; }.team-application .form-field-wide,.team-application .button,.team-application small { grid-column:auto; }.stack-visual span { margin-left:0!important; } }
 .future-event-link { display:inline-block; margin-top:24px; color:#f7e6dd; border-bottom:1px solid currentColor; font-size:13px; font-weight:700; }
+.team-resources { display:flex; flex-wrap:wrap; gap:8px 14px; margin:0 0 20px; padding-top:12px; border-top:1px solid rgba(20,20,19,.14); }.team-resources b { width:100%; font:9px var(--mono); text-transform:uppercase; letter-spacing:.08em; color:#77736c; }.team-resources a { font-size:11px; text-decoration:underline; }
 
 /* Learn palette: replace the former blue with dark purple only. */
 .learn-page .learn-hero h1 em { color:#dd4b1e; }
