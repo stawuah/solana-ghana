@@ -88,8 +88,6 @@
 .ambassador-orbit i img { filter:brightness(0) saturate(100%) invert(75%) sepia(87%) saturate(1226%) hue-rotate(93deg) brightness(98%) contrast(90%); }
 .adinkra { border-radius:50%; overflow:hidden; }.adinkra img { display:block; width:100%; height:100%; object-fit:contain; border-radius:50%; filter:drop-shadow(0 8px 12px rgba(20,20,19,.12)); }
 @keyframes splashLogo { from { opacity:0; transform:translate(-50%,-50%) scale(.55) rotate(-18deg); } to { opacity:1; transform:translate(-50%,-50%) scale(1) rotate(0); } }
-.splash-star { position:absolute; left:50%; top:50%; width:min(58vh,420px); aspect-ratio:1; transform:translate(-50%,-50%); animation:splashLogo 1.2s cubic-bezier(.2,.8,.2,1) both; }.splash-star>img:first-child { position:static; width:100%; height:100%; object-fit:contain; transform:none; }.splash-star .splash-solana { position:absolute; left:50%; top:50%; width:42%; height:auto; aspect-ratio:1; object-fit:contain; transform:translate(-50%,-50%); border-radius:0; animation:none; }
-.splash-star>img:first-child { border-radius:0; }
 .footer-adinkra { display:flex; align-items:center; gap:10px; margin-top:30px; }.footer-adinkra .adinkra { width:42px; height:42px; opacity:.9; color:#f3bc16; }.footer-adinkra .adinkra:nth-child(2) { color:#14f195; }.footer-adinkra .adinkra:nth-child(3) { color:#9945ff; }
 
 /* Learn palette: replace the former blue with dark purple only. */
