@@ -192,7 +192,7 @@ function WelcomeSplash() {
   const [visible, setVisible] = useState(true)
   useEffect(() => { const timer = setTimeout(() => setVisible(false), 5000); return () => clearTimeout(timer) }, [])
   if (!visible) return null
-  return <div className="welcome-splash" role="status" aria-label="Solana Ghana is here"><div className="splash-flag" /><div className="splash-confetti" aria-hidden="true">✦　✧　✦　✧　✦</div><img src="/solana_ghana.jpeg" alt="Solana Ghana" /><p>Solana Ghana</p><h1>is here.</h1></div>
+  return <div className="welcome-splash" role="status" aria-label="Solana Ghana is here"><div className="splash-flag" /><div className="splash-confetti" aria-hidden="true">✦　✧　✦　✧　✦</div><img src="/solana_middle_image.png" alt="Solana Ghana" /><p>Solana Ghana</p><h1>is here.</h1></div>
 }
 
 export function CommunitySite({ page }) {
