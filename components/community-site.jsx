@@ -188,8 +188,15 @@ function Community() {
   return <main className="community-page"><section className="community-hero wrap"><div><Eyebrow>Four people, one starting point</Eyebrow><h1>A local signal<br />with <em>global reach.</em></h1><p>We are building independently and deliberately: a durable place for Ghanaian builders to find each other and the wider Solana ecosystem.</p></div><div className="community-logo"><img src="/solana_ghana.jpeg" alt="Solana Ghana Community mark" /><span>BUILD · CONNECT · EMPOWER</span></div></section><section className="team-wrap"><div className="wrap"><Eyebrow>The founding circle</Eyebrow><h2>Start with<br />who is here.</h2><div className="team-orbit"><svg viewBox="0 0 1000 280" preserveAspectRatio="none" aria-hidden="true"><path d="M0,160 C180,20 340,280 510,135 S770,5 1000,155" /></svg>{[['KA','Kwasi Awuah','Outreach + technical mentorship'],['BR','BR1ANTT_','Community'],['+','Founding role','To be confirmed'],['+','Founding role','To be confirmed']].map(([initial,name,role], i) => <article key={i}><div className={`person p${i}`}>{initial}</div><h3>{name}</h3><p>{role}</p></article>)}</div></div></section><section className="join-grid wrap" id="join"><div><Eyebrow>Find the channel</Eyebrow><h2>The room is<br />taking shape.</h2><p>Choose a channel. We’ll share the earliest event and build information with the founding community first.</p></div><div className="channels"><a href="https://t.me/solanaghanacommunity" target="_blank" rel="noreferrer"><b>Telegram</b><span>For the quick signal <Arrow /></span></a><a href="https://chat.whatsapp.com/JTaWqtd3YK78ZMHhChc9Z5?mode=gi_t" target="_blank" rel="noreferrer"><b>WhatsApp</b><span>For the community room <Arrow /></span></a><a href="#join"><b>GitHub</b><span>For the work itself <Arrow /></span></a></div></section><section className="community-statement"><div><Eyebrow tone="light">Where this points</Eyebrow><h2>Superteam Ghana is an outcome we build toward—not a title we borrow.</h2><p>Independent community initiative. Official recognition and representation will follow written authorization.</p></div><Signup /></section></main>
 }
 
+function WelcomeSplash() {
+  const [visible, setVisible] = useState(true)
+  useEffect(() => { const timer = setTimeout(() => setVisible(false), 5000); return () => clearTimeout(timer) }, [])
+  if (!visible) return null
+  return <div className="welcome-splash" role="status" aria-label="Solana Ghana is here"><div className="splash-flag" /><div className="splash-confetti" aria-hidden="true">✦　✧　✦　✧　✦</div><img src="/solana_ghana.jpeg" alt="Solana Ghana" /><p>Solana Ghana</p><h1>is here.</h1></div>
+}
+
 export function CommunitySite({ page }) {
   const [open, setOpen] = useState(false)
   const pages = { home: <Home />, learn: <Learn />, courses: <Courses />, build: <Build />, ambassadors: <Ambassadors />, security: <Security />, events: <Events />, community: <Community /> }
-  return <div className={`site ${pageTheme[page]}`}><Header page={page} open={open} setOpen={setOpen} />{pages[page]}<Footer /></div>
+  return <div className={`site ${pageTheme[page]}`}>{page === 'home' && <WelcomeSplash />}<Header page={page} open={open} setOpen={setOpen} />{pages[page]}<Footer /></div>
 }
