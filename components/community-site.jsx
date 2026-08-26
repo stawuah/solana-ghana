@@ -61,7 +61,7 @@ function Signup({ tone = 'dark' }) {
 function Home() {
   return <main className="home-page">
     <section className="home-hero"><div className="hero-grid" /><AdinkraSymbol kind="gye-nyame" label="Gye Nyame symbol" />
-      <div className="hero-copy reveal-up"><Eyebrow>Solana Ghana Community</Eyebrow><h1>Akwa<span className="hero-word-tail">aba</span><span className="hero-word-period">.</span></h1><p className="hero-lede">The gateway for Ghanaian builders to learn, build, and reach the Solana ecosystem.</p><div className="hero-actions"><Button asChild><Link href="/community">Join the founding cohort <Arrow /></Link></Button><Link className="text-link" href="/learn">See how it works <Arrow /></Link></div></div>
+      <div className="hero-copy reveal-up"><Eyebrow>Solana Ghana Community</Eyebrow><h1>Akw<span className="hero-word-yellow">a</span><span className="hero-word-tail">aba</span><span className="hero-word-period">.</span></h1><p className="hero-lede">The gateway for Ghanaian builders to learn, build, and reach the Solana ecosystem.</p><div className="hero-actions"><Button asChild><Link href="/community">Join the founding cohort <Arrow /></Link></Button><Link className="text-link" href="/learn">See how it works <Arrow /></Link></div></div>
       <div className="hero-note">Twi for <b>welcome</b> <span>⌁</span> From Ghana, into the network.</div>
       <div className="flag-line"><i /><i /><i /></div>
     </section>
