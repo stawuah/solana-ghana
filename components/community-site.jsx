@@ -31,7 +31,7 @@ function Header({ page, open, setOpen }) {
     <nav className={open ? 'nav-links open' : 'nav-links'} aria-label="Primary navigation">
       {nav.map(([id, label]) => <Link key={id} href={path(id)} className={id === page ? 'active' : ''} onClick={() => setOpen(false)}>{label}</Link>)}
     </nav>
-    <Link className="header-join" href="/community">Join us <Arrow /></Link>
+    <a className="header-join" href="https://t.me/solanaghanacommunity" target="_blank" rel="noreferrer">Join us <Arrow /></a>
     <button className="menu-toggle" onClick={() => setOpen(!open)} aria-expanded={open} aria-label="Toggle menu"><span /><span /></button>
   </header>
 }
