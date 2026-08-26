@@ -80,7 +80,7 @@
 .home-page .hero-copy h1 { color:#ce1126; -webkit-text-fill-color:#ce1126; }
 .home-page .hero-copy h1 .hero-word-yellow { color:#fcd116; -webkit-text-fill-color:#fcd116; }
 .home-page .hero-copy h1 .hero-word-tail,.home-page .hero-copy h1 .hero-word-period { color:#006b3f; -webkit-text-fill-color:#006b3f; }
-.adinkra img { display:block; width:100%; height:100%; object-fit:contain; filter:drop-shadow(0 8px 12px rgba(20,20,19,.12)); }
+.adinkra { border-radius:50%; overflow:hidden; }.adinkra img { display:block; width:100%; height:100%; object-fit:contain; border-radius:50%; filter:drop-shadow(0 8px 12px rgba(20,20,19,.12)); }
 
 /* Learn palette: replace the former blue with dark purple only. */
 .learn-page .learn-hero h1 em { color:#dd4b1e; }
