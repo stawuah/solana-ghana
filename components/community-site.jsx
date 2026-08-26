@@ -5,7 +5,7 @@ import Link from 'next/link'
 import { Button } from '@/components/ui/button'
 
 const nav = [
-  ['home', 'Home'], ['learn', 'Learn'], ['build', 'Build'], ['ambassadors', 'Ambassadors'], ['security', 'Security'], ['events', 'Events'], ['community', 'Community'],
+  ['home', 'Home'], ['learn', 'Learn'], ['build', 'Build'], ['ambassadors', 'Ambassadors'], ['security', 'Teams'], ['events', 'Events'], ['community', 'Community'],
 ]
 
 const pageTheme = { home: 'cream', learn: 'yellow', courses: 'course', build: 'night', ambassadors: 'clay', security: 'forest', events: 'coral', community: 'violet' }
@@ -39,7 +39,7 @@ function Header({ page, open, setOpen }) {
 function Footer() {
   return <footer className="footer">
     <div><Eyebrow tone="light">Independent initiative</Eyebrow><h2>Build Ghana’s<br /><em>on-ramp.</em></h2></div>
-    <div className="footer-links"><div><b>Explore</b><Link href="/learn">Learn</Link><Link href="/build">Build</Link><Link href="/security">Security</Link></div><div><b>Connect</b><a href="#join">Discord</a><a href="#join">Telegram</a><a href="#join">GitHub</a></div></div>
+    <div className="footer-links"><div><b>Explore</b><Link href="/learn">Learn</Link><Link href="/build">Build</Link><Link href="/security">Teams</Link></div><div><b>Connect</b><a href="#join">Discord</a><a href="#join">Telegram</a><a href="#join">GitHub</a></div></div>
     <div className="footer-base">© 2026 Solana Ghana Community <span>Not an official Superteam or Solana Foundation chapter.</span></div>
   </footer>
 }
@@ -99,12 +99,30 @@ function Courses() {
     <section className="course-close"><div className="wrap"><div><Eyebrow tone="light">A course with receipts</Eyebrow><h2>Do not race<br />the exercises.</h2></div><div><p>Every track rewards explanation, tests and deterministic fixes over copied answers. Finish with an artifact you can inspect, defend and build upon.</p><Button variant="lime" asChild><a href="https://github.com/stawuah/rssol-memory/blob/main/README.md" target="_blank" rel="noreferrer">Read the full curriculum <Arrow /></a></Button></div></div></section></main>
 }
 
+function TeamApplication() {
+  const [sent, setSent] = useState(false)
+  return <form className="team-application" onSubmit={(event) => { event.preventDefault(); setSent(true) }}>
+    <div className="form-field"><label htmlFor="team-name">Your name</label><input id="team-name" required placeholder="Full name" /></div>
+    <div className="form-field"><label htmlFor="team-email">Email</label><input id="team-email" required type="email" placeholder="you@example.com" /></div>
+    <div className="form-field form-field-wide"><label htmlFor="team-choice">Preferred team</label><select id="team-choice" required defaultValue=""><option value="" disabled>Choose a team</option><option>Validators</option><option>Stablecoin Sandbox</option><option>Agentic Payments</option><option>Mobile & Consumer</option></select></div>
+    <div className="form-field form-field-wide"><label htmlFor="team-proof">What are you ready to contribute?</label><textarea id="team-proof" required rows="4" placeholder="Share your skills, a project, or the first milestone you would take on." /></div>
+    <Button type="submit">{sent ? 'Application received' : 'Apply to a team'} <Arrow /></Button>
+    <small>{sent ? 'Thanks. Shortlisted builders will be invited to an interview round before team placement.' : 'Selection is followed by an interview to understand readiness, fit, and commitment.'}</small>
+  </form>
+}
+
 function Security() {
-  const topics = ['Wallet permissions & malicious signing','Private-key & seed-phrase management','Program-derived addresses','Authority & ownership checks','Input & account validation','Token & mint verification','Upgrade authority','Dependency & supply-chain security','Frontend transaction transparency','Incident reporting & responsible disclosure']
-  return <main className="security-page"><section className="security-hero wrap"><div><Eyebrow tone="mint">Security & Developer Assurance Lab</Eyebrow><h1>Build it.<br /><em>Break it.</em><br />Earn trust.</h1><p>Developer assurance is not a checkpoint after the work. It is a practice we grow alongside every builder and prototype.</p><Button variant="lime" asChild><Link href="/community">Join the lab <Arrow /></Link></Button></div><div className="security-seal" aria-hidden="true"><span>SG</span><i>SECURE<br />BY DEFAULT</i><b>✦</b></div></section>
-    <section className="promise"><div className="wrap"><Eyebrow tone="mint">The line we keep</Eyebrow><h2>Zero projects promoted as production-ready without completing the review checklist.</h2><p>This is a commitment, not marketing. The lab trains practical habits, then gives builders a place to practise them in the open.</p></div></section>
-    <section className="topic-section wrap"><div className="topic-head"><Eyebrow tone="mint">Training field</Eyebrow><h2>Know what<br />to look for.</h2></div><ol className="topic-list">{topics.map((topic, i) => <li key={topic}><b>{String(i + 1).padStart(2, '0')}</b><span>{topic}</span><i>↘</i></li>)}</ol></section>
-    <section className="lab-output wrap"><div><Eyebrow tone="mint">Public goods</Eyebrow><h2>Leave the door<br />safer behind you.</h2></div><div className="output-grid">{['Secure-development checklist','Beginner wallet safety guide','Pre-demo review template','Open vulnerable-example repository','Responsible-disclosure policy'].map((x, i) => <article key={x}><b>0{i + 1}</b><span>{x}</span></article>)}</div></section><section className="security-footer"><div className="wrap"><p>Security is a community sport.</p><Link href="/events">See the lab events <Arrow /></Link></div></section></main>
+  const teams = [
+    ['01', 'Validators', 'The foundation', 'Run a six-week Validator School covering node setup, security, monitoring, incident response, and operations.', ['Validator setup curriculum', 'First cohort through node setup', 'Adopt-a-validator mentorship']],
+    ['02', 'Stablecoin Sandbox', 'The rails', 'Experiment with issuance, settlement, Token-2022 transfer hooks, confidential transfers, and PYUSD / USDC flows.', ['Shared sandbox repo and testnet', 'Stablecoin mechanics workshops', 'Documented issuance + settlement flow']],
+    ['03', 'Agentic Payments', 'The frontier', 'Build on x402 and MCP tooling for agents that can pay each other, with human-approved and delegated-wallet modes.', ['Reference MCP payment integration', 'Autonomous agent case study', 'Shared signing architecture']],
+    ['04', 'Mobile & Consumer', 'The face', 'Ship usable Solana apps for Ghana and beyond, with access to Solana Mobile / Seeker and a path toward App Store and Play Store distribution.', ['One consumer app to testable state', 'Seeker-first product experiments', 'Non-crypto-native onboarding']],
+  ]
+  return <main className="teams-page"><section className="teams-hero wrap"><div><Eyebrow>Community super team</Eyebrow><h1>Four teams.<br /><em>One stack.</em></h1><p>Specialists build independently, then plug into each other: validators underwrite the rails, the sandbox settles agents, and mobile makes the work useful.</p><div className="team-stack-nav"><a href="#validators">Validators</a><a href="#stablecoin-sandbox">Sandbox</a><a href="#agentic-payments">Agentic</a><a href="#mobile-consumer">Mobile</a></div></div><div className="stack-visual" aria-label="Team stack"><span>Mobile & Consumer</span><span>Agentic Payments</span><span>Stablecoin Sandbox</span><span>Validators</span></div></section>
+    <section className="team-grid wrap">{teams.map(([n, title, kicker, desc, milestones]) => <article id={title.toLowerCase().replaceAll(' & ', '-').replaceAll(' ', '-')} key={title}><div className="team-card-top"><b>{n}</b><Eyebrow>{kicker}</Eyebrow></div><h2>{title}</h2><p>{desc}</p><ul>{milestones.map((item) => <li key={item}>{item}</li>)}</ul><a href="#apply">Join this team <Arrow /></a></article>)}</section>
+    <section className="teams-benefits"><div className="wrap"><Eyebrow>What you unlock</Eyebrow><h2>Opportunity follows<br /><em>contribution.</em></h2><div className="benefit-strip"><span>Mobile builders <b>Solana Seeker + app distribution</b></span><span>AI builders <b>$7 AI credit for experiments</b></span><span>Sandbox builders <b>Token-2022 and stablecoin lab access</b></span><span>Validator builders <b>Six-week Validator School</b></span></div></div></section>
+    <section className="team-process wrap"><div><Eyebrow>How selection works</Eyebrow><h2>Ready is<br /><em>demonstrated.</em></h2></div><ol><li><b>01</b><span>Choose the team where your skills and curiosity have the clearest fit.</span></li><li><b>02</b><span>Submit the short application with one concrete contribution you can own.</span></li><li><b>03</b><span>Shortlisted builders join an interview round to show readiness and working style.</span></li><li><b>04</b><span>Team leads align you to a milestone and the next shared demo day.</span></li></ol></section>
+    <section className="team-apply" id="apply"><div className="wrap"><div><Eyebrow tone="light">Join the stack</Eyebrow><h2>Pick a lane.<br /><em>Bring proof.</em></h2><p>Applications are reviewed by the organizing circle. Team placement is confirmed after the interview round.</p></div><TeamApplication /></div></section></main>
 }
 
 function Events() {
