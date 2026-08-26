@@ -198,5 +198,5 @@ function WelcomeSplash() {
 export function CommunitySite({ page }) {
   const [open, setOpen] = useState(false)
   const pages = { home: <Home />, learn: <Learn />, courses: <Courses />, build: <Build />, ambassadors: <Ambassadors />, security: <Security />, events: <Events />, community: <Community /> }
-  return <div className={`site ${pageTheme[page]}`}>{page === 'home' && <WelcomeSplash />}<Header page={page} open={open} setOpen={setOpen} />{pages[page]}<Footer /></div>
+  return <div className={`site ${pageTheme[page]}`}><Header page={page} open={open} setOpen={setOpen} />{pages[page]}<Footer /></div>
 }
