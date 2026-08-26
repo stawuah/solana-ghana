@@ -76,6 +76,7 @@
 .home-page .hero-copy h1 { background:linear-gradient(105deg,#9945ff 0%,#7b5cff 38%,#14f195 72%,#0bd89c 100%); -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent; }
 .home-page .hero-copy h1 span { color:#14f195; -webkit-text-fill-color:#14f195; }
 @media (max-width:820px) { .home-page .hero-copy h1 { white-space:normal; font-size:clamp(54px,17vw,82px); } }
+@media (min-width:821px) { .home-page .hero-copy h1 { font-size:clamp(76px,10vw,150px); white-space:nowrap; } }
 
 /* Learn palette: replace the former blue with dark purple only. */
 .learn-page .learn-hero h1 em { color:#dd4b1e; }
