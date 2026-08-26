@@ -17,8 +17,8 @@ function Arrow() { return <span aria-hidden="true">↗</span> }
 function Eyebrow({ children, tone = '' }) { return <p className={`eyebrow ${tone}`}><i />{children}</p> }
 
 function AdinkraSymbol({ kind = 'gye-nyame', label = 'Adinkra symbol' }) {
-  const path = kind === 'sankofa' ? 'M52 21c-15 0-25 10-25 23 0 8 5 14 13 16-4-7-2-14 5-18 4-2 8-6 7-12 7 3 10 8 9 14' : kind === 'nkyinkyim' ? 'M22 25h14l-7 15h14l-7 15h22' : 'M40 16c-9 8-15 14-15 24 0 13 10 24 23 24 9 0 16-5 20-12-9 5-18 1-18-8 0-8 8-13 17-10-3-10-11-18-27-18Z'
-  return <span className={`adinkra adinkra-${kind}`} role="img" aria-label={label}><svg viewBox="0 0 80 80" aria-hidden="true"><circle cx="40" cy="40" r="31" /><path d={path} /></svg></span>
+  const assets = { 'gye-nyame': '/gye-nyame-medium.png', sankofa: '/akoma-ntoaso-medium.png', nkyinkyim: '/akofena-medium.png' }
+  return <span className={`adinkra adinkra-${kind}`} role="img" aria-label={label}><img src={assets[kind] || assets['gye-nyame']} alt="" /></span>
 }
 
 function OrbitMark({ small = false }) {
