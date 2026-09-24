@@ -49,12 +49,56 @@ function Footer() {
   </footer>
 }
 
+// Posts the form as JSON and tracks pending/error state. The form element is
+// captured before the await because React clears currentTarget once the
+// handler returns.
+function useFormPost(endpoint) {
+  const [state, setState] = useState('idle')
+  const [error, setError] = useState(null)
+
+  async function submit(event) {
+    event.preventDefault()
+    const form = event.currentTarget
+    const payload = Object.fromEntries(new FormData(form).entries())
+    setState('sending')
+    setError(null)
+    try {
+      const response = await fetch(endpoint, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload),
+      })
+      const data = await response.json().catch(() => ({}))
+      if (!response.ok || !data.ok) {
+        setState('idle')
+        setError(data.message || 'Something went wrong. Please try again.')
+        return
+      }
+      form.reset()
+      setState('sent')
+    } catch {
+      setState('idle')
+      setError('Network error. Please check your connection and try again.')
+    }
+  }
+
+  return { state, error, submit }
+}
+
+// Hidden from people, irresistible to bots. A populated value is dropped server-side.
+function Honeypot() {
+  return <input type="text" name="website" tabIndex={-1} autoComplete="off" aria-hidden="true"
+    style={{ position: 'absolute', left: '-9999px', width: 1, height: 1, opacity: 0 }} />
+}
+
 function Signup({ tone = 'dark' }) {
-  const [sent, setSent] = useState(false)
-  return <form className={`signup ${tone}`} onSubmit={(event) => { event.preventDefault(); setSent(true) }}>
+  const { state, error, submit } = useFormPost('/api/signup')
+  const sent = state === 'sent'
+  return <form className={`signup ${tone}`} onSubmit={submit}>
     <label htmlFor={`email-${tone}`}>Get the first invite</label>
-    <div><input id={`email-${tone}`} required type="email" placeholder="you@example.com" aria-label="Email address" /><Button variant={tone === 'dark' ? 'lime' : 'ink'} type="submit">{sent ? 'You’re in' : 'Keep me posted'} <Arrow /></Button></div>
-    <small>{sent ? 'Thank you — we’ll be in touch when the founding cohort opens.' : 'Founding cohort updates only. No noise.'}</small>
+    <Honeypot />
+    <div><input id={`email-${tone}`} name="email" required type="email" placeholder="you@example.com" aria-label="Email address" disabled={sent} /><Button variant={tone === 'dark' ? 'lime' : 'ink'} type="submit" disabled={state === 'sending' || sent}>{sent ? 'You’re in' : state === 'sending' ? 'Sending…' : 'Keep me posted'} <Arrow /></Button></div>
+    <small role={error ? 'alert' : undefined}>{error || (sent ? 'Thank you — we’ll be in touch when the founding cohort opens.' : 'Founding cohort updates only. No noise.')}</small>
   </form>
 }
 
@@ -112,14 +156,16 @@ let shares = amount.checked_mul(SCALE)
 }
 
 function TeamApplication() {
-  const [sent, setSent] = useState(false)
-  return <form className="team-application" onSubmit={(event) => { event.preventDefault(); setSent(true) }}>
-    <div className="form-field"><label htmlFor="team-name">Your name</label><input id="team-name" required placeholder="Full name" /></div>
-    <div className="form-field"><label htmlFor="team-email">Email</label><input id="team-email" required type="email" placeholder="you@example.com" /></div>
-    <div className="form-field form-field-wide"><label htmlFor="team-choice">Preferred team</label><select id="team-choice" required defaultValue=""><option value="" disabled>Choose a team</option><option>Validators</option><option>Stablecoin Sandbox</option><option>Agentic Payments</option><option>Mobile & Consumer</option></select></div>
-    <div className="form-field form-field-wide"><label htmlFor="team-proof">What are you ready to contribute?</label><textarea id="team-proof" required rows="4" placeholder="Share your skills, a project, or the first milestone you would take on." /></div>
-    <Button type="submit">{sent ? 'Application received' : 'Apply to a team'} <Arrow /></Button>
-    <small>{sent ? 'Thanks. Shortlisted builders will be invited to an interview round before team placement.' : 'Selection is followed by an interview to understand readiness, fit, and commitment.'}</small>
+  const { state, error, submit } = useFormPost('/api/applications/team')
+  const sent = state === 'sent'
+  return <form className="team-application" onSubmit={submit}>
+    <Honeypot />
+    <div className="form-field"><label htmlFor="team-name">Your name</label><input id="team-name" name="name" required autoComplete="name" placeholder="Full name" /></div>
+    <div className="form-field"><label htmlFor="team-email">Email</label><input id="team-email" name="email" required type="email" autoComplete="email" placeholder="you@example.com" /></div>
+    <div className="form-field form-field-wide"><label htmlFor="team-choice">Preferred team</label><select id="team-choice" name="team" required defaultValue=""><option value="" disabled>Choose a team</option><option>Validators</option><option>Stablecoin Sandbox</option><option>Agentic Payments</option><option>Mobile & Consumer</option></select></div>
+    <div className="form-field form-field-wide"><label htmlFor="team-proof">What are you ready to contribute?</label><textarea id="team-proof" name="contribution" required rows="4" placeholder="Share your skills, a project, or the first milestone you would take on." /></div>
+    <Button type="submit" disabled={state === 'sending'}>{sent ? 'Application received' : state === 'sending' ? 'Sending…' : 'Apply to a team'} <Arrow /></Button>
+    <small role={error ? 'alert' : undefined}>{error || (sent ? 'Thanks. Shortlisted builders will be invited to an interview round before team placement.' : 'Selection is followed by an interview to understand readiness, fit, and commitment.')}</small>
   </form>
 }
 
@@ -143,15 +189,17 @@ function Events() {
 }
 
 function AmbassadorForm() {
-  const [sent, setSent] = useState(false)
-  return <form className="ambassador-form" onSubmit={(event) => { event.preventDefault(); setSent(true) }}>
+  const { state, error, submit } = useFormPost('/api/applications/ambassador')
+  const sent = state === 'sent'
+  return <form className="ambassador-form" onSubmit={submit}>
+    <Honeypot />
     <div className="form-field"><label htmlFor="ambassador-name">Your name</label><input id="ambassador-name" name="name" required autoComplete="name" placeholder="Your full name" /></div>
     <div className="form-field"><label htmlFor="ambassador-email">Email address</label><input id="ambassador-email" name="email" required type="email" autoComplete="email" placeholder="you@example.com" /></div>
     <div className="form-field"><label htmlFor="ambassador-university">University</label><input id="ambassador-university" name="university" required placeholder="Your university" /></div>
     <div className="form-field"><label htmlFor="ambassador-github">GitHub or portfolio</label><input id="ambassador-github" name="github" placeholder="https://github.com/your-name" /></div>
     <div className="form-field form-field-wide"><label htmlFor="ambassador-plan">What would you build on campus?</label><textarea id="ambassador-plan" name="plan" required rows="4" placeholder="A workshop, club, build night, or another useful first move." /></div>
-    <Button type="submit">{sent ? 'Interest noted' : 'Join the founding programme'} <Arrow /></Button>
-    <small>{sent ? 'Thanks. This application interface is ready; connect a form inbox before applications are reviewed.' : 'Founding applications are reviewed manually. We will only use these details for programme follow-up.'}</small>
+    <Button type="submit" disabled={state === 'sending'}>{sent ? 'Interest noted' : state === 'sending' ? 'Sending…' : 'Join the founding programme'} <Arrow /></Button>
+    <small role={error ? 'alert' : undefined}>{error || (sent ? 'Thanks. Your application is in — founding applications are reviewed manually and we will follow up about next steps.' : 'Founding applications are reviewed manually. We will only use these details for programme follow-up.')}</small>
   </form>
 }
 

@@ -9,3 +9,16 @@ services:
     envVars:
       - key: NODE_VERSION
         value: "20"
+      # Set these in the Render dashboard, not here.
+      - key: DATABASE_URL
+        sync: false
+      - key: RESEND_API_KEY
+        sync: false
+      - key: RESEND_FROM
+        sync: false
+      - key: RESEND_VERIFIED
+        sync: false
+      - key: ORGANISER_EMAIL
+        sync: false
+      - key: IP_HASH_SALT
+        generateValue: true

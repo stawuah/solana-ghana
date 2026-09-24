@@ -1,3 +1,8 @@
 node_modules/
 .next/
 .next-dev/
+
+# Local environment — never commit
+.env
+.env.local
+.env.*.local
