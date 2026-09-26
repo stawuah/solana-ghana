@@ -62,4 +62,4 @@ See `.env.example`. On Render these are set in the dashboard; `render.yaml` mark
 
 ## Related
 
-Deployment infrastructure for community projects lives in a separate repository, [Solana Ghana Builder Cloud](https://github.com/stawuah), which runs on its own host and is kept out of this repo's supply chain on purpose.
+Deployment infrastructure for community projects lives in a separate repository, [Solana Ghana Builder Cloud](https://github.com/stawuah/sgbc), which runs on its own host and is kept out of this repo's supply chain on purpose.
