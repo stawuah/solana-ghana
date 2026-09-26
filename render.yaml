@@ -2,6 +2,7 @@ services:
   - type: web
     name: solana-ghana-community
     runtime: node
+    branch: main
     plan: free
     buildCommand: npm ci && npm run build
     startCommand: npm run start
